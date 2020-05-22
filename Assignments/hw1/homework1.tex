@@ -1,0 +1,186 @@
+\documentclass[a4paper]{article}
+\usepackage{amsmath} % Define various maths environments
+\usepackage{amssymb} % Define various maths symbols
+\usepackage{geometry} % Adjust the margin, paper size, and etc.
+\usepackage{enumerate} % Provide different style of lists
+\usepackage{graphicx}
+\usepackage{float}
+
+\title{—————————————————————————\\ \sc{UM-SJTU Joint Institute}}
+\author{\sc{Introduction to Cryptography}}
+\date{\sc{(Ve475)}\\——————————————————————————————}
+
+\begin{document}
+\maketitle
+\vspace{4cm}
+\centerline{\Large{\sc{Assignment 1}}}
+\vspace{7cm}
+\begin{tabular}{lll}
+\qquad \qquad Name: Sun Yiwen&ID: 517370910213\\
+\qquad \qquad Date: May 22 2020
+\end{tabular}
+
+\newpage
+\section{Simple questions}
+\begin{enumerate}
+\item
+Based on the given information, we can only use the \emph{ciphertext only} type of attack. In the case of Caesar cipher, we use the method of exhaustive search, trying all possible keys from 1-25 (0 can be skipped). For the ciphertext EVIRE, the possible plain text can be FWJSF, GXKTG, HYLUH, IZMVI, JANWJ, KBOXK, LCPYL, MDQZM, NERAN, OFSBO, PGTCP, QHUDQ, RIVER, SJWFS, TKXGT, ULYHU, VMZIV, WNAJW, XOBKX, YPCLY, ZQDMZ, ARENA, BSFOB, CTGPC, DUHQD. Among them, only RIVER and ARENA make sense, so the possible keys for this Caesar cipher are 4 and 13. RIVER and ARENA are the two possible locations for Alice and Bob's secret meeting.
+\item
+
+Since $n|4$, try the value $n=2$. Suppose K=$
+    \left(
+    \begin{array}{ccc}
+    a & b\\
+    c & d\\
+    \end{array}
+    \right)$, construct the equation:
+	$$
+    \left(
+    \begin{array}{ccc}
+    3 & 14\\
+    13 & 19\\
+    \end{array}
+    \right)
+    \left(
+    \begin{array}{ccc}
+    a & b\\
+    c & d\\
+    \end{array}
+    \right)
+    \equiv
+    \left(
+    \begin{array}{ccc}
+    4 & 11\\
+    13 & 8\\
+    \end{array}
+    \right)
+    \mod
+    26
+    $$
+We name $
+    \left(
+    \begin{array}{ccc}
+    3 & 14\\
+    13 & 19\\
+    \end{array}
+    \right)$ as matrix $A$. Since $\det(A)=-125$, $A^{-1}$ exists. We can calculate:
+    $$K=
+    \left(
+    \begin{array}{ccc}
+    a & b\\
+    c & d\\
+    \end{array}
+    \right)
+    \equiv
+    \left(
+    \begin{array}{ccc}
+    3 & 14\\
+    13 & 19\\
+    \end{array}
+    \right)^{-1}
+    \left(
+    \begin{array}{ccc}
+    4 & 11\\
+    13 & 8\\
+    \end{array}
+    \right)
+    \mod
+    26
+    $$
+    
+    $$K
+    \equiv
+    -\frac{1}{125}
+    \left(
+    \begin{array}{ccc}
+    19 & -14\\
+    -13 & 3\\
+    \end{array}
+    \right)
+    \left(
+    \begin{array}{ccc}
+    4 & 11\\
+    13 & 8\\
+    \end{array}
+    \right)
+    \mod
+    26
+    $$
+    Since $(-125)\times(-5)\equiv1\mod26$,
+    $$
+    K=-5\left(
+    \begin{array}{ccc}
+    19 & -14\\
+    -13 & 3\\
+    \end{array}
+    \right)
+    \left(
+    \begin{array}{ccc}
+    4 & 11\\
+    13 & 8\\
+    \end{array}
+    \right)
+    =
+    -5\left(
+    \begin{array}{ccc}
+    -106 & 97\\
+    -13 & -119\\
+    \end{array}
+    \right)
+    =
+    \left(
+    \begin{array}{ccc}
+    530 & -485\\
+    65 & 595\\
+    \end{array}
+    \right)
+    =
+    \left(
+    \begin{array}{ccc}
+    10 & 9\\
+    13 & 23\\
+    \end{array}
+    \right)
+    $$
+\item
+Since $n|ab$, there exists an integer $s$ such that $n\times s=ab$. Since $\gcd(a,n)=1$, there exists two integers $x,y$ such that $ax+ny=1$. We get $b=b(ax+ny)=abx+bny=nsx+bny=(sx+by)n$. Therefore, $n|b$.
+\item
+Using the Euclidean algorithm,
+$$30030=257\times116+218$$
+$$257=218\times1+39$$
+$$218=39\times5+23$$
+$$39=23\times1+16$$
+$$23=16\times1+7$$
+$$16=7\times2+2$$
+$$7=2\times3+1$$
+$$2=1\times2$$
+Therefore, $\gcd(30030,257)=1$.
+Since $16<\sqrt{257}<17$, if 2,3,5,7,11,13 are not factors of 257, then 257 is prime. $257\mod2=1$, $257\mod3=2$, $257\mod5=2$, $257\mod7=5$, $257\mod11=4$, $257\mod13=10$, thus we can prove that 257 is prime.
+\item
+If the attacker can get a piece of plaintext and the corresponding ciphertext, then he can easily get the key by XORing the plaintext and the ciphertext. If the same key is used later on a new message, the attacker can easily decrypt the new message, which is why using the same key twice in OTP is dangerous.
+\item
+To be secure, the attacker must run more than $2^{128}$ instructions to break the cipher. In this case, $\sqrt{n\log n}\geqslant128$. We get $n\geqslant4486.4$. Therefore, a graph of size 4487 should be used to be secure.
+
+\end{enumerate}
+
+\section{Vigenere cipher}
+\begin{enumerate}
+\item
+The Vigenere cipher is a method of encrypting alphabetic text by using a series of interwoven Caesar ciphers, based on the letters of a keyword. To encrypt, a table of alphabets can be used, termed a Vigenere table. It has the alphabet written out 26 times in different rows, each alphabet shifted cyclically to the left compared to the previous alphabet, corresponding to the 26 possible Caesar ciphers. At different points in the encryption process, the cipher uses a different alphabet from one of the rows. The alphabet used at each point depends on a repeating keyword. Decryption is performed by going to the row in the table corresponding to the key, finding the position of the ciphertext letter in that row and then using the column's label as the plaintext.
+\item
+\begin{enumerate}
+\item
+Because if the plaintext is the same letter repeated several hundred times and the key is 6 letters long, then the ciphertext will form a loop that is 6 letters long and repeat the 6 letters over and over again. This is easy to notice and Eve will suspect it.
+\item
+By counting the number of letters in the ciphertext's loop, Eve can find the key length, which is 6.
+\item
+Since the plaintext is one letter repeated, Eve can try from A to Z. Using the Vigenere table, Eve can find the 26 possible keys. Suppose the plaintext Eve is currently trying is AAAAAA, then she can go to column A, find the letters in the ciphertext and record their corresponding row. Since no English word of length six is a shift of another English word, only one of the 26 possible keys is a meaningful English word. Therefore, Eve can determine the key.
+\end{enumerate}
+\end{enumerate}
+
+
+
+
+
+
+\end{document}
