@@ -22,6 +22,8 @@ int main() {
 	mpz_class b = rr.get_z_bits(4096);
 	mpz_class GMPresult = gcd(a, b);
 	mpz_class EUCresult = extended_euclidean_algorithm(a, b).first;
+	cout << "The first random number is: " << a << endl;
+	cout << "The second random number is: " << b << endl;
 	cout << "gcd(a,b) with GMP Library: " << GMPresult << endl;
 	cout << "gcd(a,b) with extended Euclidean algorithm: " << EUCresult << endl;
 	if (EUCresult == GMPresult) cout << "The result is same as that of the GMP function." << endl;

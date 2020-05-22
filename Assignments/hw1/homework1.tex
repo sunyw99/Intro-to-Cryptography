@@ -166,7 +166,7 @@ To be secure, the attacker must run more than $2^{128}$ instructions to break th
 \section{Vigenere cipher}
 \begin{enumerate}
 \item
-The Vigenere cipher is a method of encrypting alphabetic text by using a series of interwoven Caesar ciphers, based on the letters of a keyword. To encrypt, a table of alphabets can be used, termed a Vigenere table. It has the alphabet written out 26 times in different rows, each alphabet shifted cyclically to the left compared to the previous alphabet, corresponding to the 26 possible Caesar ciphers. At different points in the encryption process, the cipher uses a different alphabet from one of the rows. The alphabet used at each point depends on a repeating keyword. Decryption is performed by going to the row in the table corresponding to the key, finding the position of the ciphertext letter in that row and then using the column's label as the plaintext.
+The Vigenere cipher is a method of encrypting alphabetic text by using a series of interwoven Caesar ciphers, based on the letters of a keyword. A table of alphabets should be used in this cipher. The table has the alphabet written out 26 times in different rows, each alphabet shifted one-letter-long to the left compared to the previous alphabet. When encrypting one letter at a time, the cipher uses a different alphabet from one of the rows, where the row number depends on a repeating keyword. Decryption is performed by going to the row in the table corresponding to the key, finding the position of the ciphertext letter in that row and then using the column's label as the plaintext.
 \item
 \begin{enumerate}
 \item
@@ -174,7 +174,7 @@ Because if the plaintext is the same letter repeated several hundred times and t
 \item
 By counting the number of letters in the ciphertext's loop, Eve can find the key length, which is 6.
 \item
-Since the plaintext is one letter repeated, Eve can try from A to Z. Using the Vigenere table, Eve can find the 26 possible keys. Suppose the plaintext Eve is currently trying is AAAAAA, then she can go to column A, find the letters in the ciphertext and record their corresponding row. Since no English word of length six is a shift of another English word, only one of the 26 possible keys is a meaningful English word. Therefore, Eve can determine the key.
+Since the plaintext is one letter repeated, Eve can try from A to Z. Using the Vigenere table, Eve can find the 26 possible keys. Suppose the plaintext Eve is currently trying is AAAAAA, then she can go to column A, find the ciphertext letters and record their corresponding row label, which will form the possible keyword. Since no English word of length six is a shift of another English word, only one of the 26 possible keys is a meaningful English word. Therefore, Eve can determine the key.
 \end{enumerate}
 \end{enumerate}
 
