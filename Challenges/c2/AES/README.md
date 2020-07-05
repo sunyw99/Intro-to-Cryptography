@@ -26,4 +26,4 @@ To decrypt a ciphertext with the generated key:
 $ ./c2 --encrypt "encryptedmessage" --key keyfile.txt
 ```
 # Note
-When the length of the plaintext is not 0 mod 16, extra "#"s are added until the length of the plaintext become a multiple of 16 bytes, which ensures that the encryption process can be run successfully. The length of the ciphertext is guaranteed to be a multiple of 32. Correspondingly, this AES cipher cannot decrypt ciphertexts whose length are not multiples of 32.
+When the length of the plaintext is not 0 mod 16, extra "#"s are appended until the length of the plaintext become a multiple of 16 bytes, which ensures that the encryption process can be run successfully. The length of the ciphertext is guaranteed to be a multiple of 32. Correspondingly, this AES cipher cannot decrypt ciphertexts whose length are not multiples of 32.
